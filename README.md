@@ -50,7 +50,7 @@ Run these commands inside Claude Code:
 Marketplace skills are namespaced in Claude Code. Invoke this one with:
 
 ```text
-/adaptive-guidelines:adaptive-guidelines finish
+/adaptive-guidelines:adaptive-guidelines enable
 ```
 
 ## Use
@@ -65,6 +65,21 @@ $adaptive-guidelines finish
 $adaptive-guidelines apply <candidate-id>
 $adaptive-guidelines status
 ```
+
+Commands:
+
+| Command | What it does | Writes |
+| --- | --- | --- |
+| `enable` | Creates or finds the project ledger and grants standing permission for automatic observation capture. Run once per repository. | Ledger configuration |
+| `capture` | Reviews the available conversation and work context now, then creates or updates reusable observations. | Ledger only |
+| `review` | Rechecks observations for scope, duplicates, conflicts, evidence, wording, and destination; promotes eligible records to candidate status. | Ledger status and history only |
+| `finish` | Treats the current moment as a work-unit checkpoint, then runs capture and review together. It reports uncertainty instead of claiming completion when a required gate is missing. | Ledger only |
+| `apply <candidate-id>` | Rechecks one approved candidate, writes the smallest rule to the best official guideline, and records the promotion. | Official guideline and ledger |
+| `apply eligible` | Applies every approved, unambiguous candidate that passes the promotion checks; skips and reports unresolved candidates. | Official guidelines and ledger |
+| `status` | Summarizes observations, candidates, conflicts, and promoted records. | Nothing |
+| `explain <candidate-id>` | Shows one record's normalized rule, evidence, scope, history, and suggested destination. | Nothing |
+| `reject <candidate-id>` | Marks an incorrect or unwanted candidate as rejected while preserving its history. | Ledger only |
+| `supersede <candidate-id>` | Retires an outdated rule in favor of a newer one without deleting its audit history. | Ledger only |
 
 Standalone Claude Code installations use `/adaptive-guidelines`. Other Agent
 Skills hosts may use a slash command, a skill picker, or natural language. The
