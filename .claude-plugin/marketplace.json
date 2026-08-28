@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "adaptive-guidelines",
+  "version": "0.1.0",
+  "description": "Agent workflow skills maintained by Antonio Fulgêncio.",
+  "owner": {
+    "name": "Antonio Fulgêncio"
+  },
+  "plugins": [
+    {
+      "name": "adaptive-guidelines",
+      "source": "./",
+      "description": "Turn recurring corrections into reviewable project guidelines.",
+      "version": "0.1.0",
+      "category": "productivity"
+    }
+  ]
+}

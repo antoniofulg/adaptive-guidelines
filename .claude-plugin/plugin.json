@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "adaptive-guidelines",
+  "version": "0.1.0",
+  "description": "Turn recurring corrections into reviewable project guidelines.",
+  "author": {
+    "name": "Antonio Fulgêncio"
+  },
+  "homepage": "https://github.com/antoniofulg/adaptive-guidelines#readme",
+  "repository": "https://github.com/antoniofulg/adaptive-guidelines",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "guidelines",
+    "workflow",
+    "self-improvement"
+  ]
+}

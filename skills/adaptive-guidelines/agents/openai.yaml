@@ -1,0 +1,7 @@
+interface:
+  display_name: "Adaptive Guidelines"
+  short_description: "Capture corrections into adaptive project guidelines"
+  default_prompt: "Use $adaptive-guidelines finish to capture and review reusable project guidance from this work."
+
+policy:
+  allow_implicit_invocation: true
