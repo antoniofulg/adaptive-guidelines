@@ -14,44 +14,8 @@ silently edits official project guidelines.
 
 ## Install
 
-Choose one installation method. Installing both the standalone skill and a
-plugin can expose the same skill twice.
-
-### Agent Skills installer
-
-Install for Codex and Claude Code:
-
 ```bash
-npx skills add antoniofulg/adaptive-guidelines \
-  --skill adaptive-guidelines \
-  --agent codex \
-  --agent claude-code
-```
-
-Add `--global` to make it available across projects.
-
-### Codex plugin
-
-```bash
-codex plugin marketplace add antoniofulg/adaptive-guidelines
-codex plugin add adaptive-guidelines@adaptive-guidelines
-```
-
-Start a new Codex thread after installation so the new skill is discovered.
-
-### Claude Code plugin
-
-Run these commands inside Claude Code:
-
-```text
-/plugin marketplace add antoniofulg/adaptive-guidelines
-/plugin install adaptive-guidelines@adaptive-guidelines
-```
-
-Marketplace skills are namespaced in Claude Code. Invoke this one with:
-
-```text
-/adaptive-guidelines:adaptive-guidelines enable
+npx skills add antoniofulg/adaptive-guidelines
 ```
 
 ## Use
