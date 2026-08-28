@@ -7,9 +7,10 @@ conventions into small, reviewable guidelines. It adapts to an existing agent
 workflow when one exists and falls back to evidence-based work-unit detection
 for features, fixes, goals, reviews, migrations, and releases.
 
-The skill captures observations automatically only after standing permission,
-reviews useful candidates at meaningful checkpoints, and never silently edits
-official project guidelines.
+After standing permission, the skill can capture observations automatically
+during matching agent turns, review useful candidates at meaningful
+checkpoints, and suggest promotion. It is not a background service and never
+silently edits official project guidelines.
 
 ## Install
 
@@ -55,18 +56,64 @@ Marketplace skills are namespaced in Claude Code. Invoke this one with:
 
 ## Use
 
-Codex examples:
+Examples below use Codex syntax. Standalone Claude Code installations use
+`/adaptive-guidelines`; marketplace plugins use
+`/adaptive-guidelines:adaptive-guidelines`. Other Agent Skills hosts may use a
+skill picker or natural language.
+
+### Recommended: autonomous after `enable`
+
+Run once in each repository:
 
 ```text
 $adaptive-guidelines enable
-$adaptive-guidelines capture
-$adaptive-guidelines review
-$adaptive-guidelines finish
-$adaptive-guidelines apply <candidate-id>
-$adaptive-guidelines status
 ```
 
-Commands:
+Then work normally. When the host activates the skill from a correction or
+workflow checkpoint, the agent:
+
+1. captures reusable corrections in the project ledger;
+2. consolidates repeated observations;
+3. reviews them when a work unit reaches a meaningful checkpoint;
+4. suggests candidates worth promoting.
+
+You only approve the candidates you want:
+
+```text
+$adaptive-guidelines apply <candidate-id>
+```
+
+Automatic capture is model-driven, not a background process. If you want a
+deterministic end-of-feature checkpoint, run `finish` explicitly. Promotion
+always remains manual.
+
+### Manual workflow
+
+Run each stage yourself when you want full control:
+
+```text
+$adaptive-guidelines capture
+$adaptive-guidelines review
+$adaptive-guidelines status
+$adaptive-guidelines apply <candidate-id>
+```
+
+The sequence is:
+
+```text
+capture → review → inspect → apply
+```
+
+At the end of a feature or goal, `finish` is the shorter checkpoint flow:
+
+```text
+finish → capture + review
+```
+
+`finish` does not promote anything. Follow it with `apply <candidate-id>` after
+reviewing the suggestion.
+
+### Command reference
 
 | Command | What it does | Writes |
 | --- | --- | --- |
@@ -80,20 +127,6 @@ Commands:
 | `explain <candidate-id>` | Shows one record's normalized rule, evidence, scope, history, and suggested destination. | Nothing |
 | `reject <candidate-id>` | Marks an incorrect or unwanted candidate as rejected while preserving its history. | Ledger only |
 | `supersede <candidate-id>` | Retires an outdated rule in favor of a newer one without deleting its audit history. | Ledger only |
-
-Standalone Claude Code installations use `/adaptive-guidelines`. Other Agent
-Skills hosts may use a slash command, a skill picker, or natural language. The
-words after the skill name are intents, not a dependency on a command parser.
-
-Typical setup:
-
-1. Run `enable` once in a repository to permit automatic observation capture.
-2. Work normally. The agent notices reusable corrections without interrupting
-   active work.
-3. At a workflow-defined checkpoint—or an inferred completed goal—the agent
-   proposes only candidates worth reviewing.
-4. Run `apply <candidate-id>` to promote an approved rule into the best existing
-   project guideline.
 
 ## Candidate storage
 
