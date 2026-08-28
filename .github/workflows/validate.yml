@@ -42,5 +42,5 @@ jobs:
       - name: Install Claude Code plugin from the published marketplace
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
-          npx --yes @anthropic-ai/claude-code plugin marketplace add .
+          npx --yes @anthropic-ai/claude-code plugin marketplace add ./
           npx --yes @anthropic-ai/claude-code plugin install adaptive-guidelines@adaptive-guidelines --scope user --yes
