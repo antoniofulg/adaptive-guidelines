@@ -1,6 +1,6 @@
 interface:
   display_name: "Adaptive Guidelines"
-  short_description: "Reuse lessons and learn from mistakes across workflows"
+  short_description: "Reuse lessons and suggest skills from recurring workflows"
   default_prompt: "Use $adaptive-guidelines to consult relevant saved lessons before starting this work."
 
 policy:

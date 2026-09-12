@@ -10,8 +10,9 @@ agent workflow or infers checkpoints from evidence when none is defined.
 
 The skill looks for relevant saved lessons before work. After standing
 permission, it can capture observations, assess later reuse, maintain lesson
-validity, and suggest promotion at meaningful checkpoints. It is not a
-background service and never silently edits official project guidelines.
+validity, and suggest guideline updates or new skills at meaningful checkpoints.
+It is not a background service and never silently creates skills or edits
+official project guidelines.
 
 ## Install
 
@@ -97,6 +98,37 @@ same ledger, and changes to an already promoted official rule still require
 explicit approval. Reading requires no capture permission; automatic writes
 use the existing `enable` permission.
 
+### Suggest skills from recurring procedures
+
+During `review` or a workflow checkpoint, the agent can recognize a procedure
+that recurs across tasks and has demonstrated successful results. It checks
+available skills, then suggests a new one only when the procedure needs a
+distinct trigger and reusable steps, decisions, or references. A short rule can
+remain a guideline; a procedure already covered by a skill can improve that
+skill instead.
+
+The suggestion includes a name, trigger, scope, inputs, expected outcome,
+procedure outline, supporting work, and proposed file location. It lives as a
+`Type: skill-proposal` record in the existing ledger, linked to related lessons
+when available. Successful procedures need no invented error records, and
+their supporting work does not change the lessons' recurrence counts.
+
+For example, “keep manifest versions aligned” is a rule, while a repeatedly
+validated package-release preparation workflow may justify a skill. After
+reviewing its scope and destination, authorize creation with:
+
+```text
+$adaptive-guidelines apply <proposal-id>
+```
+
+The agent creates and validates the approved skill before marking the proposal
+promoted. Existing capture permission covers saving proposals; it does not
+authorize creating skill files. Creation also does not run the captured
+workflow, install the skill globally, or publish it.
+Without capture permission, the agent can still present a proposal in the
+conversation. Direct approval of its scope and destination authorizes creation
+and its ledger record without enabling future automatic capture.
+
 ### Manual workflow
 
 Run each stage yourself when you want full control:
@@ -127,12 +159,12 @@ reviewing the suggestion.
 
 | Command | What it does | Writes |
 | --- | --- | --- |
-| `enable` | Creates or finds the ledger and grants standing permission for capture, reuse validation, and validity updates. Run once per repository. | Ledger configuration |
+| `enable` | Creates or finds the ledger and grants standing permission for capture, reuse validation, skill proposals, and validity updates. Run once per repository. | Ledger configuration |
 | `capture` | Reviews the available conversation and work context now, then creates or updates reusable observations. | Ledger only |
-| `review` | Rechecks observations, later reuse, validity, conflicts, and destination; promotes eligible records to candidate status. | Ledger records and history only |
+| `review` | Rechecks lessons and destinations; evaluates recurring procedures for skill proposals and eligible records for candidate status. | Ledger records and history only |
 | `finish` | Treats the current moment as a work-unit checkpoint, then runs capture and review together. It reports uncertainty instead of claiming completion when a required gate is missing. | Ledger only |
-| `apply <candidate-id>` | Rechecks one approved candidate, writes the smallest rule to the best official guideline, and records the promotion. | Official guideline and ledger |
-| `apply eligible` | Applies every approved, unambiguous candidate that passes the promotion checks; skips and reports unresolved candidates. | Official guidelines and ledger |
+| `apply <candidate-id>` | Rechecks an approved guideline candidate or skill proposal, creates the accepted artifact, validates it, and records promotion. | Official guideline or approved skill, and ledger |
+| `apply eligible` | Applies every approved, unambiguous candidate that passes the promotion checks; skips and reports unresolved candidates. | Approved guidelines or skills, and ledger |
 | `status` | Summarizes observations, candidates, conflicts, and promoted records. | Nothing |
 | `explain <candidate-id>` | Shows one record's normalized rule, evidence, scope, history, and suggested destination. | Nothing |
 | `reject <id>` | Marks a lesson as rejected while preserving its history. | Ledger only |
