@@ -1,8 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "adaptive-guidelines",
-  "version": "0.2.0",
-  "description": "Reuse durable project lessons and learn from corrections, agent mistakes, and wasted effort.",
+  "version": "0.3.0",
+  "description": "Reuse durable project lessons and suggest skills from validated recurring workflows.",
   "author": {
     "name": "Antonio Fulgêncio"
   },

@@ -36,9 +36,10 @@ candidate_threshold: 2
 
 `$adaptive-guidelines enable` creates or updates that frontmatter with
 `capture_mode: automatic`. An explicit `capture`, `review`, or `finish`
-invocation authorizes ledger changes for that request only. If it creates the
-ledger without standing permission, use `capture_mode: manual`; do not turn a
-one-time request into future write permission.
+invocation, or an approved promotion request, authorizes ledger changes for
+that request only. If it creates the ledger without standing permission, use
+`capture_mode: manual`; do not turn a one-time request into future write
+permission.
 
 If neither standing nor current permission exists, retain only the available
 conversational assessment and offer capture once at a meaningful checkpoint.
@@ -48,9 +49,10 @@ but official guidelines change only after explicit approval. Do not weaken
 this boundary because capture is automatic.
 
 The same permission covers user corrections, agent self-observations, reuse
-validation, and validity updates in every phase. Reading and assessing a
-lesson requires no write permission. Without capture permission, leave its
-record unchanged and disclose a validity concern only when it affects the task.
+validation, skill proposals, and validity updates in every phase. Reading and
+assessing a record requires no write permission. Without capture permission,
+leave its record unchanged and disclose a validity concern only when it affects
+the task.
 Explicit read-only requests such as `status` and `explain` leave records
 unchanged even with standing capture permission.
 An `observed` record is already durable knowledge; candidate review and
@@ -58,7 +60,12 @@ promotion are separate decisions, not prerequisites for saving it.
 
 ## Record format
 
-Keep one section per semantic rule:
+Keep one section per semantic rule. Existing records implicitly have type
+`lesson`; no migration is needed. A `Type: skill-proposal` record instead
+describes one bounded procedure and references related lesson IDs. When
+creating or handling that type, use the format and eligibility rules in
+[skill-proposals.md](skill-proposals.md) in full; its supporting work is
+separate from lesson recurrence.
 
 ```md
 ## use-bun-for-package-management
@@ -192,8 +199,9 @@ scans or delete historical records.
 
 ## Invariants
 
-- One semantic rule has one active record.
-- One record expresses one atomic behavior.
+- One semantic rule or skill proposal has one active record.
+- Each lesson expresses one atomic behavior; each skill proposal describes
+  one bounded procedure without merging its related lessons.
 - Scope and context remain narrow enough for future use.
 - Evidence is a concise paraphrase, never a raw conversation transcript.
 - One incident contributes one occurrence, even when multiple sources report
