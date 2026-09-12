@@ -6,9 +6,9 @@ reached a meaningful checkpoint, or ended.
 ## Work-unit model
 
 A work unit is a bounded outcome, not a required artifact or phase name. It may
-be a feature, fix, goal, issue batch, review, migration, release, or direct
-correction. Nested tasks can belong to a larger work unit; completing a child
-task does not necessarily complete its parent.
+be research, a plan, feature, fix, goal, issue batch, review, migration, release,
+or direct correction. Nested tasks can belong to a larger work unit;
+completing a child task does not necessarily complete its parent.
 
 Track only enough lifecycle context to associate evidence and choose a review
 checkpoint:
@@ -36,9 +36,9 @@ verifier, final QA, merge, or another gate before it considers work complete.
 Do not replace that contract with generic heuristics.
 
 Existing workflows may already maintain lessons or durable knowledge. Reuse
-their lifecycle signals, but do not merge user-derived guideline observations
-with verification failures or other knowledge categories whose semantics
-differ.
+their lifecycle signals and reference their reports as evidence for behavioral
+lessons from user corrections or agent self-observations. Preserve the meaning
+of those stores rather than copying raw failures into guideline records.
 
 ## Start detection
 
@@ -53,7 +53,16 @@ one supporting signal exists:
 A vague discussion or isolated question is not a work-unit start. Do not wait
 for a formal start marker when the outcome and active work are already clear.
 
+At start, resumption, or a phase change, use the main skill's before-work
+lookup. Consulting relevant lessons neither creates a checkpoint nor grants
+capture permission.
+
 ## Checkpoint and completion detection
+
+Capture can happen during any phase; it does not require work-unit completion.
+A phase transition or approach change can surface a self-observation about
+mistakes, wasted time, unnecessary steps, or excess context. Use that pause to
+capture the lesson under the existing permission rules, then continue work.
 
 Prefer the workflow's authoritative terminal signal. Otherwise combine
 evidence such as:

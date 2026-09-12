@@ -1,7 +1,7 @@
 {
   "name": "adaptive-guidelines",
-  "version": "0.1.0",
-  "description": "Turn recurring corrections into reviewable project guidelines.",
+  "version": "0.2.0",
+  "description": "Reuse durable project lessons and learn from corrections, agent mistakes, and wasted effort.",
   "author": {
     "name": "Antonio Fulgêncio",
     "url": "https://github.com/antoniofulg"
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Adaptive Guidelines",
-    "shortDescription": "Turn corrections into reusable project guidance",
-    "longDescription": "Capture recurring corrections and stable conventions, review them at meaningful workflow checkpoints, and promote approved candidates into concise project guidelines.",
+    "shortDescription": "Reuse lessons and learn from mistakes across workflows",
+    "longDescription": "Find relevant lessons before work, capture corrections, agent mistakes, and wasted effort, assess later reuse, and retire outdated observations. Promote or revise official guidelines only with approval.",
     "developerName": "Antonio Fulgêncio",
     "category": "Productivity",
     "capabilities": [
@@ -28,7 +28,8 @@
     ],
     "websiteURL": "https://github.com/antoniofulg/adaptive-guidelines",
     "defaultPrompt": [
-      "Use $adaptive-guidelines finish to review reusable guidance from this work.",
+      "Use $adaptive-guidelines to consult relevant saved lessons before starting this work.",
+      "Use $adaptive-guidelines capture to save lessons from corrections, agent mistakes, and wasted effort in this work.",
       "Use $adaptive-guidelines status to show current observations and candidates."
     ]
   }
